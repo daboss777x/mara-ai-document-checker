@@ -1,0 +1,8 @@
+{
+  "document_type": "sales_contract",
+  "expect_flagged": [
+    "buyer_signature",
+    "buyer_signed_date"
+  ],
+  "strict": true
+}

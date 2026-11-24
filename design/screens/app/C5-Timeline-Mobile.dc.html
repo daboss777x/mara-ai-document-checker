@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>My timeline – mobile</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="width: 390px; height: 1100px; padding: 16px 16px 40px; display: flex; flex-direction: column; gap: 16px">
+
+  <header class="glass" style="border-radius: 999px; height: 56px; padding: 0 20px; display: flex; align-items: center">
+    <span class="serif" style="font-size: 22px">Cedar &amp; Stone</span>
+  </header>
+
+  <div>
+    <div class="sky-eyebrow" style="font-size: 11px">1208 Barton Hills Dr</div>
+    <h1 class="serif sky" style="margin: 6px 0 0; font-size: 42px; line-height: 1.02">Your timeline</h1>
+    <p class="sky" style="margin: 6px 0 0; font-weight: 500">Here's what happens next, and when.</p>
+  </div>
+
+  <div class="mara" style="padding: 14px; display: flex; gap: 12px; align-items: flex-start">
+    <span class="mav" aria-hidden="true">M</span>
+    <div style="font-size: 14.5px"><strong>What changed:</strong> your closing moved from Dec 12 to <strong>Dec 19</strong> after the amendment you signed. Other dates moved with it.</div>
+  </div>
+
+  <ol class="panel" style="list-style: none; margin: 0; padding: 20px 18px 4px">
+    <sc-for list="{{steps}}" as="s" hint-placeholder-count="7">
+      <li style="display: flex; gap: 14px">
+        <div style="display: flex; flex-direction: column; align-items: center; width: 22px; flex: none">
+          <span style="width: 18px; height: 18px; border-radius: 50%; margin-top: 3px; {{s.dotStyle}}"></span>
+          <span style="flex: 1; width: 2px; background: #d3ddef; min-height: 30px"></span>
+        </div>
+        <div style="padding-bottom: 18px; flex: 1">
+          <div style="display: flex; justify-content: space-between; gap: 8px; align-items: baseline">
+            <strong style="font-size: 16px">{{s.title}}</strong>
+            <span style="font-size: 13px; white-space: nowrap; {{s.dateStyle}}">{{s.date}}</span>
+          </div>
+          <sc-if value="{{s.note}}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top: 6px; font-size: 13.5px; padding: 8px 10px; border-radius: 10px; {{s.noteStyle}}">{{s.note}}</div>
+          </sc-if>
+        </div>
+      </li>
+    </sc-for>
+  </ol>
+
+  <p class="sky" style="font-size: 13px; font-weight: 500; margin: 0">Dates come from your signed contract. Your agent will tell you if anything changes.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var done = 'background: #12924f';
+    var now = 'background: #1951fc; box-shadow: 0 0 0 5px rgba(25,81,252,.18)';
+    var next = 'background: #ffffff; border: 2px solid #aab8d3';
+    var muted = 'color: #3b4f78';
+    return {
+      steps: [
+        { title: 'Offer accepted', date: 'Nov 14', dotStyle: done, dateStyle: muted },
+        { title: 'Earnest money received', date: 'Nov 16', dotStyle: done, dateStyle: muted },
+        { title: 'Inspection period ends', date: 'Fri, Nov 28', dotStyle: now, dateStyle: 'color: #1951fc; font-weight: 700', note: 'Up next. Rachel will go over the inspection with you.', noteStyle: 'background: #e8f1ff; color: #0b1f4d' },
+        { title: 'Appraisal', date: 'By Dec 5', dotStyle: next, dateStyle: muted },
+        { title: 'Loan approval', date: 'By Dec 12', dotStyle: next, dateStyle: muted, note: 'We need your pre-approval letter to keep this date.', noteStyle: 'background: #fff4de; color: #5c3700' },
+        { title: 'Final walkthrough', date: 'Dec 18', dotStyle: next, dateStyle: muted },
+        { title: 'Closing day', date: 'Fri, Dec 19', dotStyle: next, dateStyle: 'color: #0b1f4d; font-weight: 700' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Messages – mobile</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="width: 390px; height: 900px; padding: 16px; display: flex; flex-direction: column; gap: 14px">
+
+  <header class="glass" style="border-radius: 22px; padding: 10px 14px; display: flex; align-items: center; gap: 12px">
+    <span class="avatar" style="width: 42px; height: 42px">RK</span>
+    <div style="flex: 1"><strong>Rachel Kim</strong><div class="muted" style="font-size: 12.5px">Your agent · with Mara, digital assistant</div></div>
+    <a class="btn2" href="#call" aria-label="Call Rachel" style="width: 44px; padding: 0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>
+    </a>
+  </header>
+
+  <div class="panel" style="flex: 1; display: flex; flex-direction: column; gap: 12px; overflow: hidden; padding: 14px; background: linear-gradient(160deg, rgba(255,255,255,.80), rgba(255,255,255,.62))">
+    <div class="faint" style="text-align: center; font-size: 12px; font-weight: 600">Today</div>
+
+    <div style="display: flex; gap: 8px; align-items: flex-end; max-width: 90%">
+      <span class="mav" aria-hidden="true" style="width: 28px; height: 28px; font-size: 16px">M</span>
+      <div class="mara" style="padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: #ffffff">
+        <div style="font-size: 14.5px">Hi Enoch, it's Mara from Cedar &amp; Stone. We just need 3 more things: your pre-approval letter, and a read-through and signature on the seller's disclosure and HOA addendum. It takes about 5 minutes in your portal. Getting these in today keeps your Dec 19 closing on track.</div>
+        <div class="faint" style="font-size: 11.5px; margin-top: 8px">Prepared by Mara · approved by Rachel · 10:02 AM</div>
+      </div>
+    </div>
+
+    <div style="align-self: flex-end; max-width: 80%">
+      <div style="padding: 12px 14px; border-radius: 18px 18px 6px 18px; background: linear-gradient(180deg, #2f6bff, #1951fc); color: #ffffff; font-size: 14.5px">Lender says the letter comes tomorrow. Is that ok?</div>
+      <div class="faint" style="font-size: 11.5px; margin-top: 4px; text-align: right">via text · 10:14 AM</div>
+    </div>
+
+    <div style="display: flex; gap: 8px; align-items: flex-end; max-width: 90%">
+      <span class="mav" aria-hidden="true" style="width: 28px; height: 28px; font-size: 16px">M</span>
+      <div class="mara" style="padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: #ffffff">
+        <div style="font-size: 14.5px">Yes, tomorrow works. It's due Wednesday. Just upload it here when it arrives.</div>
+        <div class="faint" style="font-size: 11.5px; margin-top: 8px">Mara · 10:15 AM</div>
+      </div>
+    </div>
+
+    <div style="align-self: flex-end; max-width: 80%">
+      <div style="padding: 12px 14px; border-radius: 18px 18px 6px 18px; background: linear-gradient(180deg, #2f6bff, #1951fc); color: #ffffff; font-size: 14.5px">Also, what happens if the inspection finds problems?</div>
+      <div class="faint" style="font-size: 11.5px; margin-top: 4px; text-align: right">10:16 AM</div>
+    </div>
+
+    <div style="display: flex; gap: 8px; align-items: flex-end; max-width: 90%">
+      <span class="mav" aria-hidden="true" style="width: 28px; height: 28px; font-size: 16px">M</span>
+      <div class="mara" style="padding: 12px 14px; border-radius: 18px 18px 18px 6px; background: #ffffff">
+        <div style="font-size: 14.5px">That's a great question for Rachel. She'll explain your options. I've let her know, and she usually replies within a few hours.</div>
+        <div class="faint" style="font-size: 11.5px; margin-top: 8px">Mara · 10:16 AM</div>
+      </div>
+    </div>
+  </div>
+
+  <form class="glass" style="border-radius: 22px; padding: 8px; display: flex; gap: 8px; align-items: center; background: rgba(255,255,255,.9)">
+    <button type="button" class="btn2" aria-label="Attach a file" style="width: 44px; padding: 0; flex: none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11l-8 8a5 5 0 0 1-7-7l8-8a3.5 3.5 0 0 1 5 5l-8 8a2 2 0 0 1-3-3l7-7"></path></svg>
+    </button>
+    <label for="msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message</label>
+    <input id="msg" class="field" placeholder="Message Rachel and Mara" style="height: 44px; border-radius: 999px">
+    <button type="submit" class="btn" aria-label="Send" style="width: 44px; padding: 0; flex: none">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </button>
+  </form>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

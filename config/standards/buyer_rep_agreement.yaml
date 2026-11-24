@@ -1,0 +1,35 @@
+key: buyer_rep_agreement
+name: Buyer representation agreement
+required_signatures:
+  - key: buyer_signature
+    description: The buyer has signed on the buyer signature line.
+    severity: blocker
+    client_fix_text: "Please sign on the 'Buyer' line on the last page, then upload it again."
+  - key: broker_signature
+    description: The broker or agent for Cedar & Stone Realty has signed.
+    severity: blocker
+    client_fix_text: "Your agent still needs to sign this one. We'll take care of that and let you know."
+required_initials:
+  - key: initials_each_page
+    description: The buyer has initialed the bottom of every page.
+    severity: warning
+    client_fix_text: "Please initial the bottom corner of every page, then upload it again."
+required_dates:
+  - key: buyer_signed_date
+    description: A signing date is written next to the buyer's signature.
+    severity: blocker
+    client_fix_text: "Please write today's date next to your signature, then upload it again."
+required_fields:
+  - key: buyer_name
+    description: The buyer's full name is filled in at the top.
+    severity: blocker
+    client_fix_text: "Your full name is missing near the top of page 1. Please fill it in and upload again."
+  - key: agreement_term
+    description: The start and end dates of the agreement term are filled in.
+    severity: warning
+    client_fix_text: "The start and end dates of the agreement are blank. Please fill them in."
+other_rules:
+  - key: all_pages_present
+    description: Every page of the agreement is included and readable (no missing or cut-off pages).
+    severity: blocker
+    client_fix_text: "Some pages look missing or cut off. Please upload every page in one file."

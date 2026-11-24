@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deal page – Timeline change</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 24px 280px">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+
+    <a class="btn2" href="S2-Deals-Desktop.dc.html" style="align-self: flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Deals</a>
+
+    <header>
+      <div class="sky-eyebrow">Buyer · Enoch Omunu · Agent Rachel Kim</div>
+      <h1 class="serif sky" style="margin: 6px 0 0; font-size: 54px; line-height: 1">1208 Barton Hills Dr</h1>
+    </header>
+
+    <nav class="tabs glass" aria-label="Deal sections" style="border-radius: 16px; padding: 0 10px">
+      <a class="tab" href="#overview">Overview</a>
+      <a class="tab" href="#checklist">Checklist</a>
+      <a class="tab" href="S5-Viewer.dc.html">Documents</a>
+      <a class="tab" href="S3-Deal-Findings.dc.html">Findings</a>
+      <a class="tab on" href="#timeline">Timeline</a>
+      <a class="tab" href="#messages">Messages</a>
+      <a class="tab" href="#activity">Activity</a>
+    </nav>
+
+    <div class="mara" style="padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap">
+      <span class="mav" aria-hidden="true">M</span>
+      <div style="flex: 1 1 420px">
+        <strong style="font-size: 16px">Amendment v2 changed 4 dates.</strong>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 8px; font-size: 14.5px">
+          <span>Closing <s class="faint">Dec 12</s> → <strong>Dec 19</strong></span>
+          <span>Financing <s class="faint">Dec 5</s> → <strong>Dec 12</strong></span>
+          <span>Appraisal <s class="faint">Nov 28</s> → <strong>Dec 5</strong></span>
+          <span>Walkthrough <s class="faint">Dec 11</s> → <strong>Dec 18</strong></span>
+        </div>
+        <div class="faint" style="font-size: 13px; margin-top: 6px">Source: <a class="ref" href="S5-Viewer.dc.html">Amendment v2 · p.1 · §2</a> signed Nov 21</div>
+      </div>
+      <sc-if value="{{notSent}}" hint-placeholder-val="{{ true }}">
+        <button type="button" class="btn" onClick="{{notify}}">Notify everyone</button>
+      </sc-if>
+      <sc-if value="{{sent}}" hint-placeholder-val="{{ false }}">
+        <a class="chip c-done" href="S4-Approvals-Desktop.dc.html" style="text-decoration: none">Notice for 4 people is waiting for approval</a>
+      </sc-if>
+    </div>
+
+    <div class="panel" style="padding: 20px 22px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px">
+        <h2 style="margin: 0; font-size: 18px">Deadlines</h2>
+        <div role="group" aria-label="Timeline version" style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #edf1f8">
+          <button type="button" class="nav {{v1cls}}" onClick="{{pickV1}}" style="height: 36px; border: none; font: inherit; font-size: 13.5px; cursor: pointer">v1 · Contract</button>
+          <button type="button" class="nav {{v2cls}}" onClick="{{pickV2}}" style="height: 36px; border: none; font: inherit; font-size: 13.5px; cursor: pointer">v2 · Amendment (operative)</button>
+        </div>
+      </div>
+      <div style="overflow-x: auto">
+        <table class="tbl" style="min-width: 760px">
+          <thead><tr><th>Deadline</th><th>Due</th><th>Counted from</th><th>Source</th><th>Owner</th><th>Status</th></tr></thead>
+          <tbody>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+              <tr>
+                <td><strong>{{r.label}}</strong></td>
+                <td style="{{r.dueStyle}}">{{r.due}}</td>
+                <td class="muted">{{r.rule}}</td>
+                <td><a class="ref" href="S5-Viewer.dc.html">{{r.src}}</a></td>
+                <td>{{r.owner}}</td>
+                <td><span class="chip {{r.chip}}">{{r.status}}</span></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { v: 2, sent: false }; }
+  renderVals() {
+    var self = this;
+    var v2 = this.state.v === 2;
+    var changed = 'color: #1951fc; font-weight: 700';
+    var rows = [
+      { label: 'Earnest money & option fee', due: 'Nov 21', rule: '3 days after effective date', src: 'Contract §5A · p.2', owner: 'Buyer', status: 'Met', chip: 'c-done' },
+      { label: 'Option period ends, 5 PM', due: 'Fri, Nov 28', rule: '10 days after effective date', src: 'Contract §5B · p.2', owner: 'Buyer agent', status: 'Upcoming', chip: 'c-check' },
+      { label: 'HOA documents to buyer', due: 'Nov 28', rule: 'Per HOA addendum', src: 'HOA Addendum §A', owner: 'Listing agent', status: 'Missing', chip: 'c-fix' },
+      { label: 'Appraisal', due: v2 ? 'Dec 5' : 'Nov 28', dueStyle: v2 ? changed : '', rule: v2 ? 'Amendment §2(b)' : 'Third-party financing addendum', src: v2 ? 'Amendment v2 · p.1' : 'TPF Addendum · p.1', owner: 'Lender', status: 'Upcoming', chip: 'c-check' },
+      { label: 'Financing approval', due: v2 ? 'Dec 12' : 'Dec 5', dueStyle: v2 ? changed : '', rule: v2 ? 'Amendment §2(c)' : '17 days after effective date', src: v2 ? 'Amendment v2 · p.1' : 'TPF Addendum · p.1', owner: 'Lender', status: 'At risk', chip: 'c-block' },
+      { label: 'Final walkthrough', due: v2 ? 'Dec 18' : 'Dec 11', dueStyle: v2 ? changed : '', rule: '1 day before closing', src: v2 ? 'Amendment v2 · p.1' : 'Contract §7 · p.4', owner: 'Buyer agent', status: 'Upcoming', chip: 'c-check' },
+      { label: 'Closing', due: v2 ? 'Fri, Dec 19' : 'Fri, Dec 12', dueStyle: v2 ? changed : '', rule: v2 ? 'Amendment §2(a)' : 'Contract §9A', src: v2 ? 'Amendment v2 · p.1' : 'Contract §9A · p.5', owner: 'Title', status: 'Upcoming', chip: 'c-check' }
+    ];
+    return {
+      rows: rows,
+      v1cls: v2 ? '' : 'on',
+      v2cls: v2 ? 'on' : '',
+      pickV1: function () { self.setState({ v: 1 }); },
+      pickV2: function () { self.setState({ v: 2 }); },
+      notSent: !this.state.sent,
+      sent: this.state.sent,
+      notify: function () { self.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

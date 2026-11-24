@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff – Deals</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 20px 280px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+  <aside class="panel" style="flex: 1 1 232px; max-width: 260px; padding: 20px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 560px">
+    <div style="padding: 0 8px 18px"><span class="serif" style="font-size: 24px">Cedar &amp; Stone</span><div class="muted" style="font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase">Realty · Staff</div></div>
+    <nav aria-label="Staff" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="S1-Today-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>Today</a>
+      <a class="nav" href="S4-Approvals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path><path d="M3 20h18"></path></svg>Approvals<span class="count">6</span></a>
+      <a class="nav on" href="S2-Deals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>Deals</a>
+      <a class="nav" href="S8-Settings.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Settings</a>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+      <div>
+        <div class="sky-eyebrow">Your deals</div>
+        <h1 class="serif sky" style="margin: 6px 0 0; font-size: 56px; line-height: 1">4 active deals</h1>
+      </div>
+      <a class="btn" href="#new">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New deal
+      </a>
+    </div>
+
+    <div class="glass" style="border-radius: 999px; padding: 6px; display: flex; gap: 4px; flex-wrap: wrap; align-self: flex-start">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+        <button type="button" class="nav {{f.cls}}" onClick="{{f.pick}}" style="height: 38px; border: none; font: inherit; font-size: 14px; cursor: pointer">{{f.label}}</button>
+      </sc-for>
+    </div>
+
+    <div class="panel" style="padding: 6px 8px; overflow-x: auto">
+      <table class="tbl" style="min-width: 820px">
+        <thead><tr><th>Property</th><th>Client</th><th>Side</th><th>Next deadline</th><th>Issues</th><th>Risk</th><th>Agent</th></tr></thead>
+        <tbody>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+            <tr>
+              <td><a href="{{r.href}}" style="color: #0b1f4d; font-weight: 600; text-decoration: none">{{r.addr}}</a></td>
+              <td>{{r.client}}</td>
+              <td>{{r.side}}</td>
+              <td>{{r.next}}</td>
+              <td>{{r.issues}}</td>
+              <td><span class="chip {{r.riskChip}}">{{r.risk}}</span></td>
+              <td><span class="avatar" style="width: 30px; height: 30px; font-size: 11px">RK</span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { f: 'All' }; }
+  renderVals() {
+    var self = this;
+    var all = [
+      { addr: '1208 Barton Hills Dr', client: 'Enoch Omunu', side: 'Buyer', next: 'Inspection ends Nov 28', issues: '2', risk: 'At risk', riskChip: 'c-block', href: 'S3-Deal-Findings.dc.html' },
+      { addr: '44 Rainey St #1802', client: 'Priya & Dev Shah', side: 'Seller', next: 'HOA docs due Nov 25', issues: '0', risk: 'Low', riskChip: 'c-done', href: '#rainey' },
+      { addr: '3310 Cherrywood Rd', client: 'Marcus Bell', side: 'Buyer', next: 'Financing Dec 3', issues: '1', risk: 'Watch', riskChip: 'c-fix', href: '#cherrywood' },
+      { addr: '907 W Mary St', client: 'Lena Ortiz', side: 'Seller', next: 'Closing Dec 1', issues: '0', risk: 'Low', riskChip: 'c-done', href: '#mary' }
+    ];
+    var f = this.state.f;
+    var rows = all.filter(function (r) { return f === 'All' || (f === 'At risk' && r.risk !== 'Low') || (f === 'Buyers' && r.side === 'Buyer') || (f === 'Sellers' && r.side === 'Seller'); });
+    var filters = ['All', 'At risk', 'Buyers', 'Sellers'].map(function (l) {
+      return { label: l, cls: l === f ? 'on' : '', pick: function () { self.setState({ f: l }); } };
+    });
+    return { rows: rows, filters: filters };
+  }
+}
+</script>
+</body>
+</html>

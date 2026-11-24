@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff – Approval queue</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 20px 280px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+  <aside class="panel" style="flex: 1 1 232px; max-width: 260px; padding: 20px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 600px">
+    <div style="padding: 0 8px 18px"><span class="serif" style="font-size: 24px">Cedar &amp; Stone</span><div class="muted" style="font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase">Realty · Staff</div></div>
+    <nav aria-label="Staff" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav" href="S1-Today-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2"></path></svg>Today</a>
+      <a class="nav on" href="S4-Approvals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path><path d="M3 20h18"></path></svg>Approvals<span class="count">{{left}}</span></a>
+      <a class="nav" href="S2-Deals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>Deals</a>
+      <a class="nav" href="S8-Settings.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Settings</a>
+    </nav>
+    <div style="margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 12px 8px 0; border-top: 1px solid rgba(11,31,77,.12)">
+      <span class="avatar">RK</span><div><strong style="font-size: 14px">Rachel Kim</strong><div class="muted" style="font-size: 12px">Agent · Licensed TX</div></div>
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+      <div>
+        <div class="sky-eyebrow">Approval queue</div>
+        <h1 class="serif sky" style="margin: 6px 0 0; font-size: 56px; line-height: 1">Nothing goes out without your OK.</h1>
+      </div>
+      <button type="button" class="btn2" onClick="{{approveReminders}}">Approve 2 reminders</button>
+    </div>
+
+    <div class="glass" style="border-radius: 999px; padding: 6px; display: flex; gap: 4px; flex-wrap: wrap; align-self: flex-start">
+      <span class="nav on" style="height: 38px">All · {{left}}</span>
+      <span class="nav" style="height: 38px">Messages</span>
+      <span class="nav" style="height: 38px">Timeline changes</span>
+      <span class="nav" style="height: 38px">Findings</span>
+      <span class="nav" style="height: 38px">Drafts</span>
+    </div>
+
+    <sc-if value="{{allDone}}" hint-placeholder-val="{{ false }}">
+      <div class="panel" style="padding: 40px; text-align: center">
+        <div class="serif" style="font-size: 40px">You're all caught up.</div>
+        <p class="muted" style="margin: 6px 0 0">Mara will add new items here as documents and replies come in.</p>
+      </div>
+    </sc-if>
+
+    <sc-for list="{{items}}" as="it" hint-placeholder-count="4">
+      <sc-if value="{{it.open}}" hint-placeholder-val="{{ true }}">
+        <article class="panel" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap">
+            <span class="mav" aria-hidden="true">M</span>
+            <div style="flex: 1 1 360px; min-width: 0">
+              <div class="faint" style="font-size: 12.5px; font-weight: 600">{{it.kind}} · {{it.deal}}</div>
+              <h2 style="margin: 2px 0 0; font-size: 19px">Mara wants to {{it.title}}</h2>
+              <p class="muted" style="margin: 6px 0 0; font-size: 14px">Why: {{it.why}} <span class="ref">{{it.ref}}</span></p>
+            </div>
+            <sc-if value="{{it.lock}}" hint-placeholder-val="{{ false }}">
+              <span class="chip c-lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Needs a licensed agent</span>
+            </sc-if>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 13.5px">
+            <span class="muted">To:</span><strong>{{it.to}}</strong><span class="chip c-check" style="height: 24px">{{it.channel}}</span>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px">
+            <span class="label">Message preview (you can edit)</span>
+            <textarea class="field" rows="3">{{it.body}}</textarea>
+          </label>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center">
+            <button type="button" class="btn" onClick="{{it.approve}}">{{it.cta}}</button>
+            <button type="button" class="btn2">Edit</button>
+            <button type="button" class="btn2 btnbad" onClick="{{it.reject}}">Reject</button>
+            <span class="faint hide-sm" style="margin-left: auto; font-size: 12.5px"><span class="kbd">A</span> approve · <span class="kbd">E</span> edit · <span class="kbd">R</span> reject</span>
+          </div>
+        </article>
+      </sc-if>
+      <sc-if value="{{it.closed}}" hint-placeholder-val="{{ false }}">
+        <div class="glass" style="border-radius: 18px; padding: 14px 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <span class="chip {{it.doneChip}}">{{it.doneLabel}}</span>
+          <span style="flex: 1; font-size: 14.5px">{{it.title}} · {{it.deal}}</span>
+          <button type="button" class="btn3" onClick="{{it.undo}}">Undo</button>
+        </div>
+      </sc-if>
+    </sc-for>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { st: {} }; }
+  renderVals() {
+    var self = this;
+    var st = this.state.st;
+    var base = [
+      { id: 'a1', kind: 'Message', deal: '1208 Barton Hills Dr', title: 'text Enoch about 3 missing documents', why: 'pre-approval letter due Wed; seller’s disclosure missing initials; HOA addendum unsigned.', ref: 'Checklist · 3 items', to: 'Enoch Omunu · (512) •••-0123', channel: 'SMS', cta: 'Approve & send', body: 'Hi Enoch, it’s Mara from Cedar & Stone Realty. We just need 3 more things from you: your pre-approval letter, and a read-through and signature on the seller’s disclosure and HOA addendum. It takes about 5 minutes: [portal link]. Getting these in today keeps your Dec 19 closing on track. Reply STOP to opt out.', reminder: true },
+      { id: 'a2', kind: 'Timeline change', deal: '1208 Barton Hills Dr', title: 'tell everyone the closing moved to Dec 19', why: 'Amendment v2 signed Nov 21 changes closing and 3 related deadlines.', ref: 'Amendment v2 · p.1 §2', to: 'Enoch Omunu, Dana Ruiz (listing agent), Summit Home Loans, Capital Title', channel: 'Email', cta: 'Approve & send to 4', body: 'Update for 1208 Barton Hills Dr: under the signed amendment, closing is now Fri, Dec 19 (was Dec 12). Financing deadline is now Dec 12 and appraisal is due by Dec 5. Updated timeline attached.' },
+      { id: 'a3', kind: 'Finding', deal: '1208 Barton Hills Dr', title: 'treat two name spellings as the same buyer', why: '“Enoch O. Omunu” on the contract and “Enoch Omunu” on the pre-approval.', ref: 'Contract p.1 · Pre-approval p.1', to: 'Deal file (internal)', channel: 'No message sent', cta: 'Yes, same person', body: 'Marking these as the same person clears this flag. If the lender letter must match exactly, reject this and Mara will draft a request for a corrected letter instead.' },
+      { id: 'a4', kind: 'Draft', deal: '1208 Barton Hills Dr', title: 'send the repair request to the listing agent', why: 'Inspection report uploaded Nov 22; Enoch asked about 2 repairs.', ref: 'Inspection p.14, p.22', to: 'Dana Ruiz · listing agent', channel: 'Email', cta: 'Approve & send', lock: true, body: 'Hi Dana, attached is our repair amendment for 1208 Barton Hills Dr covering the water heater venting and the GFCI outlets noted in the inspection. Please review with your sellers before the option period ends Fri, Nov 28 at 5 PM.' },
+      { id: 'a5', kind: 'Message', deal: '3310 Cherrywood Rd', title: 'ask the lender for a loan status update', why: 'no lender reply in 4 days; financing deadline Dec 3.', ref: 'Contract §3 · Financing', to: 'Jordan Lee · Hill Country Mortgage', channel: 'Email', cta: 'Approve & send', body: 'Hi Jordan, checking in on Marcus Bell’s loan for 3310 Cherrywood Rd. The financing deadline is Wed, Dec 3. Could you share where underwriting stands and anything you still need from us?' },
+      { id: 'a6', kind: 'Message', deal: '44 Rainey St #1802', title: 'remind Priya about the HOA documents', why: 'HOA documents are due to the buyer Tue, Nov 25.', ref: 'HOA Addendum §A', to: 'Priya & Dev Shah', channel: 'SMS', cta: 'Approve & send', body: 'Hi Priya, it’s Mara from Cedar & Stone. The HOA documents for 44 Rainey St are due to the buyer tomorrow. If you have them, you can upload them here: [portal link]. Reply STOP to opt out.', reminder: true }
+    ];
+    var left = 0;
+    var items = base.map(function (b) {
+      var s = st[b.id];
+      if (!s) left++;
+      return Object.assign({}, b, {
+        open: !s, closed: !!s,
+        doneLabel: s === 'rejected' ? 'Rejected' : 'Approved',
+        doneChip: s === 'rejected' ? 'c-miss' : 'c-done',
+        approve: function () { var n = Object.assign({}, self.state.st); n[b.id] = 'approved'; self.setState({ st: n }); },
+        reject: function () { var n = Object.assign({}, self.state.st); n[b.id] = 'rejected'; self.setState({ st: n }); },
+        undo: function () { var n = Object.assign({}, self.state.st); delete n[b.id]; self.setState({ st: n }); }
+      });
+    });
+    return {
+      items: items,
+      left: left,
+      allDone: left === 0,
+      approveReminders: function () { var n = Object.assign({}, self.state.st); base.forEach(function (b) { if (b.reminder && !n[b.id]) n[b.id] = 'approved'; }); self.setState({ st: n }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

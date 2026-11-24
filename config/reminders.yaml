@@ -1,0 +1,16 @@
+# Automatic SMS reminders (hourly_sweep). One combined reminder per client listing
+# everything still outstanding. Never more than max_per_client_per_day.
+cadence:
+  # Day 0 is the invite (sent when the deal is created). Reminders follow on day 2 and
+  # day 4 after the deal was created, then every `repeat_every_days` days after that.
+  days: [2, 4]
+  repeat_every_days: 3
+# Reminders go out only in this local hour of the client's timezone.
+send_hour_local: 10
+# No SMS between these local times; queued messages wait for the next sweep.
+quiet_hours:
+  start: "20:00"
+  end: "08:00"
+max_per_client_per_day: 1
+# hourly_sweep re-dispatches documents stuck in `received` longer than this.
+stuck_document_minutes: 10

@@ -1,0 +1,43 @@
+key: sales_contract
+name: Sales contract
+required_signatures:
+  - key: buyer_signature
+    description: Every buyer named in the contract has signed.
+    severity: blocker
+    client_fix_text: "Please sign on every 'Buyer' line on the signature page, then upload it again."
+  - key: seller_signature
+    description: Every seller named in the contract has signed.
+    severity: blocker
+    client_fix_text: "The seller's signature is missing. Your agent will follow up with the other side."
+required_initials:
+  - key: initials_each_page
+    description: Buyer initials appear at the bottom of every page.
+    severity: warning
+    client_fix_text: "Please initial the bottom of every page, then upload it again."
+required_dates:
+  - key: effective_date
+    description: The effective date (date of final acceptance) is filled in.
+    severity: blocker
+    client_fix_text: "The effective date is blank. Please ask your agent to fill it in, then upload again."
+  - key: buyer_signed_date
+    description: Each buyer's signature has a date next to it.
+    severity: blocker
+    client_fix_text: "Please write the date next to your signature, then upload it again."
+required_fields:
+  - key: property_address
+    description: The property address is filled in.
+    severity: blocker
+    client_fix_text: "The property address is missing. Please fill it in and upload again."
+  - key: sales_price
+    description: The sales price is filled in.
+    severity: blocker
+    client_fix_text: "The sales price is blank. Please fill it in and upload again."
+  - key: closing_date
+    description: The closing date is filled in.
+    severity: blocker
+    client_fix_text: "The closing date is blank. Please fill it in and upload again."
+other_rules:
+  - key: all_pages_present
+    description: Every page of the contract is included and readable.
+    severity: blocker
+    client_fix_text: "Some pages look missing or cut off. Please upload every page in one file."

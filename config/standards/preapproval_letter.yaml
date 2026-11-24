@@ -1,0 +1,26 @@
+key: preapproval_letter
+name: Mortgage pre-approval letter
+required_signatures:
+  - key: lender_signature
+    description: The letter is signed by a loan officer (a handwritten or clearly typed signature block).
+    severity: warning
+    client_fix_text: "The letter doesn't look signed by your lender. Please ask them for a signed copy."
+required_dates:
+  - key: letter_date
+    description: The letter has a date, and it is within the last 90 days.
+    severity: blocker
+    client_fix_text: "This letter is undated or more than 90 days old. Please ask your lender for a new one."
+required_fields:
+  - key: buyer_name
+    description: The buyer's name appears and matches the client on the deal.
+    severity: blocker
+    client_fix_text: "We can't see your name on this letter. Please ask your lender for a corrected copy."
+  - key: approval_amount
+    description: A loan or approval amount is stated.
+    severity: blocker
+    client_fix_text: "The letter doesn't show an approval amount. Please ask your lender for a corrected copy."
+  - key: lender_name
+    description: The lender's name and contact details are shown.
+    severity: warning
+    client_fix_text: "We can't see the lender's name or contact details. Please upload the full letter."
+other_rules: []

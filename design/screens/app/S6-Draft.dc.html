@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Draft from template</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 24px 260px">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+
+    <a class="btn2" href="S3-Deal-Findings.dc.html" style="align-self: flex-start"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Barton Hills</a>
+    <div>
+      <div class="sky-eyebrow">Draft from template</div>
+      <h1 class="serif sky" style="margin: 6px 0 0; font-size: 54px; line-height: 1">Mara fills it in. You check it.</h1>
+    </div>
+
+    <ol class="glass" aria-label="Steps" style="list-style: none; margin: 0; border-radius: 999px; padding: 6px; display: flex; gap: 4px; flex-wrap: wrap; align-self: flex-start">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="3">
+        <li><button type="button" class="nav {{s.cls}}" onClick="{{s.go}}" style="height: 38px; border: none; font: inherit; font-size: 14px; cursor: pointer">{{s.label}}</button></li>
+      </sc-for>
+    </ol>
+
+    <sc-if value="{{isPick}}" hint-placeholder-val="{{ false }}">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px">
+        <sc-for list="{{templates}}" as="t" hint-placeholder-count="4">
+          <button type="button" class="panel" onClick="{{t.pick}}" style="padding: 20px; text-align: left; font: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 6px; {{t.style}}">
+            <strong style="font-size: 16px">{{t.name}}</strong>
+            <span class="muted" style="font-size: 14px">{{t.desc}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isPreview}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+        <div class="paper" style="flex: 999 1 560px; padding: 44px 48px; font-size: 15px; line-height: 1.7">
+          <div style="font-family: 'Instrument Serif', serif; font-size: 26px">Cedar &amp; Stone Realty</div>
+          <div style="color: #52648c; font-size: 13px; margin-bottom: 22px">Austin, Texas</div>
+          <p style="margin: 0 0 14px">November 24, 2026</p>
+          <p style="margin: 0 0 14px">Dear <span style="background: #dcf6e8; padding: 0 4px; border-radius: 4px">Dana Ruiz</span>,</p>
+          <p style="margin: 0 0 14px">For <span style="background: #dcf6e8; padding: 0 4px; border-radius: 4px">1208 Barton Hills Dr, Austin, TX 78704</span>, we still need the following from the seller before <span style="background: #dcf6e8; padding: 0 4px; border-radius: 4px">Friday, November 28</span>:</p>
+          <ul style="margin: 0 0 14px; padding-left: 20px">
+            <li>HOA resale certificate from <span class="hl" style="padding: 0 4px">[HOA management company]</span></li>
+            <li>An answer to question 14 on the Seller's Disclosure Notice</li>
+          </ul>
+          <p style="margin: 0 0 14px">Please upload them to the shared deal file or reply to this email.</p>
+          <p style="margin: 0">Thank you,<br><span style="background: #dcf6e8; padding: 0 4px; border-radius: 4px">Rachel Kim</span></p>
+        </div>
+        <aside class="panel" style="flex: 1 1 300px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+          <strong>Document request letter</strong>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13.5px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #dcf6e8; border: 1px solid #a3dfbf"></span>Filled from the deal</div>
+          <div style="display: flex; gap: 8px; align-items: center; font-size: 13.5px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #ffe9bf; border: 1px solid #e39a2a"></span>Mara couldn't fill this. Please check.</div>
+          <label class="label" for="hoa">HOA management company</label>
+          <input id="hoa" class="field" placeholder="Type the company name">
+          <hr class="divider">
+          <div style="font-size: 13.5px"><span class="muted">To:</span> <strong>Dana Ruiz</strong> · listing agent · Email</div>
+          <button type="button" class="btn" onClick="{{toSend}}">Send for approval</button>
+          <p class="faint" style="margin: 0; font-size: 12.5px">Mara only fills approved templates. She never writes contract terms.</p>
+        </aside>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isSent}}" hint-placeholder-val="{{ false }}">
+      <div class="panel" style="padding: 36px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center">
+        <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#12924f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8 12l3 3 5-6"></path></svg>
+        <div class="serif" style="font-size: 36px">Draft is in the approval queue.</div>
+        <a class="btn2" href="S4-Approvals-Desktop.dc.html">Open approvals</a>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { step: 2, t: 0 }; }
+  renderVals() {
+    var self = this;
+    var step = this.state.step;
+    var labels = ['1 · Pick a template', '2 · Check the draft', '3 · Send for approval'];
+    var tpl = [
+      { name: 'Document request letter', desc: 'Ask any party for missing documents.' },
+      { name: 'Deadline notice', desc: 'Tell parties about an upcoming or changed date.' },
+      { name: 'Closing instructions', desc: 'What the client brings and does on closing day, with the wire-fraud warning.' },
+      { name: 'Commission disbursement authorization', desc: 'Prefilled from the buyer agreement and contract.' }
+    ];
+    return {
+      steps: labels.map(function (l, i) { return { label: l, cls: step === i + 1 ? 'on' : '', go: function () { self.setState({ step: i + 1 }); } }; }),
+      templates: tpl.map(function (t, i) { return Object.assign({}, t, { style: i === self.state.t ? 'border: 2px solid #1951fc' : '', pick: function () { self.setState({ t: i, step: 2 }); } }); }),
+      isPick: step === 1,
+      isPreview: step === 2,
+      isSent: step === 3,
+      toSend: function () { self.setState({ step: 3 }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

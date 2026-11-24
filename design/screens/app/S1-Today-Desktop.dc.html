@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Staff – Today</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 20px 280px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+  <aside class="panel" style="flex: 1 1 232px; max-width: 260px; padding: 20px 14px; display: flex; flex-direction: column; gap: 6px; min-height: 600px">
+    <div style="padding: 0 8px 18px"><span class="serif" style="font-size: 24px">Cedar &amp; Stone</span><div class="muted" style="font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase">Realty · Staff</div></div>
+    <nav aria-label="Staff" style="display: flex; flex-direction: column; gap: 4px">
+      <a class="nav on" href="S1-Today-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"></path></svg>Today</a>
+      <a class="nav" href="S4-Approvals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10"></path><path d="M3 20h18"></path></svg>Approvals<span class="count">6</span></a>
+      <a class="nav" href="S2-Deals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path></svg>Deals</a>
+      <a class="nav" href="S8-Settings.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6a7 7 0 0 0 0 2.4l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"></path></svg>Settings</a>
+    </nav>
+    <div style="margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 12px 8px 0; border-top: 1px solid rgba(11,31,77,.12)">
+      <span class="avatar">RK</span><div><strong style="font-size: 14px">Rachel Kim</strong><div class="muted" style="font-size: 12px">Agent · Licensed TX</div></div>
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center">
+      <label for="q" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search</label>
+      <input id="q" class="field" placeholder="Search deals, people or documents" style="flex: 1 1 320px; max-width: 520px; border-radius: 999px">
+      <span style="flex: 1"></span>
+      <button type="button" class="btn2"><span class="mav" aria-hidden="true" style="width: 26px; height: 26px; font-size: 15px">M</span>Ask Mara</button>
+    </div>
+
+    <div>
+      <div class="sky-eyebrow">Monday, November 24</div>
+      <h1 class="serif sky" style="margin: 6px 0 0; font-size: 58px; line-height: 1">Good morning, Rachel.</h1>
+      <p class="sky" style="margin: 10px 0 0; font-size: 18px; font-weight: 500">Mara has 6 items waiting for your OK, and 1 deal is at risk.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 20px">
+
+      <section class="panel" aria-labelledby="h-ap" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; justify-content: space-between; align-items: center"><h2 id="h-ap" style="margin: 0; font-size: 17px">Waiting for your OK</h2><span class="count" style="margin: 0">6</span></div>
+        <sc-for list="{{approvals}}" as="a" hint-placeholder-count="3">
+          <div class="mara" style="padding: 12px 14px; display: flex; gap: 12px; align-items: center">
+            <span class="mav" aria-hidden="true" style="width: 30px; height: 30px; font-size: 17px">M</span>
+            <div style="flex: 1; min-width: 0"><div style="font-size: 14.5px; font-weight: 600">{{a.title}}</div><div class="muted" style="font-size: 13px">{{a.deal}}</div></div>
+            <button type="button" class="btn" style="height: 40px; padding: 0 14px">Approve</button>
+          </div>
+        </sc-for>
+        <a class="btn2" href="S4-Approvals-Desktop.dc.html">Review all 6</a>
+      </section>
+
+      <section class="panel" aria-labelledby="h-risk" style="padding: 22px; display: flex; flex-direction: column; gap: 12px">
+        <h2 id="h-risk" style="margin: 0; font-size: 17px">Deals at risk</h2>
+        <a href="S3-Deal-Findings.dc.html" style="border-radius: 18px; padding: 16px; text-decoration: none; color: #0b1f4d; display: block; background: #fff7f7; border: 1px solid #f3a9a9">
+          <div style="display: flex; justify-content: space-between; gap: 8px"><strong>1208 Barton Hills Dr</strong><span class="chip c-block">At risk</span></div>
+          <div class="muted" style="font-size: 13.5px; margin-top: 6px">Enoch Omunu · Buyer · closing Fri, Dec 19</div>
+          <div class="bad" style="font-size: 14px; margin-top: 8px">Pre-approval letter not in yet · 2 open document issues</div>
+        </a>
+        <a href="S2-Deals-Desktop.dc.html" style="border-radius: 18px; padding: 16px; text-decoration: none; color: #0b1f4d; display: block; background: #fffaf0; border: 1px solid #f1c77c">
+          <div style="display: flex; justify-content: space-between; gap: 8px"><strong>3310 Cherrywood Rd</strong><span class="chip c-fix">Watch</span></div>
+          <div class="muted" style="font-size: 13.5px; margin-top: 6px">Marcus Bell · Buyer · financing Dec 3</div>
+          <div class="warn" style="font-size: 14px; margin-top: 8px">No reply from lender in 4 days</div>
+        </a>
+      </section>
+
+      <section class="panel" aria-labelledby="h-dl" style="padding: 22px">
+        <h2 id="h-dl" style="margin: 0 0 6px; font-size: 17px">Deadlines in the next 72 hours</h2>
+        <table class="tbl">
+          <thead><tr><th>Deadline</th><th>Deal</th><th>Due</th></tr></thead>
+          <tbody>
+            <tr><td>HOA documents to buyer</td><td>44 Rainey St #1802</td><td class="warn" style="font-weight: 600">Tue, Nov 25</td></tr>
+            <tr><td>Pre-approval letter</td><td>1208 Barton Hills Dr</td><td class="warn" style="font-weight: 600">Wed, Nov 26</td></tr>
+            <tr><td>Option period ends, 5 PM</td><td>1208 Barton Hills Dr</td><td>Fri, Nov 28</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel" aria-labelledby="h-up" style="padding: 22px; display: flex; flex-direction: column; gap: 4px">
+        <h2 id="h-up" style="margin: 0 0 8px; font-size: 17px">New uploads</h2>
+        <div style="display: flex; gap: 12px; align-items: center; min-height: 54px; border-bottom: 1px solid rgba(11,31,77,.08)">
+          <div style="flex: 1"><strong style="font-size: 14.5px">Lead-based paint disclosure</strong><div class="muted" style="font-size: 13px">Enoch Omunu · 9:41 AM</div></div>
+          <span class="chip c-done">Passed</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; min-height: 54px; border-bottom: 1px solid rgba(11,31,77,.08)">
+          <div style="flex: 1"><strong style="font-size: 14.5px">Seller's disclosure</strong><div class="muted" style="font-size: 13px">Enoch Omunu · yesterday</div></div>
+          <span class="chip c-fix">2 issues</span>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center; min-height: 54px">
+          <div style="flex: 1"><strong style="font-size: 14.5px">HOA resale certificate</strong><div class="muted" style="font-size: 13px">Priya Shah · yesterday</div></div>
+          <span class="chip c-done">Passed</span>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      approvals: [
+        { title: 'Text Enoch about 3 missing documents', deal: '1208 Barton Hills Dr · SMS' },
+        { title: 'Notify all parties: closing moved to Dec 19', deal: '1208 Barton Hills Dr · 5 people' },
+        { title: 'Ask lender for loan status update', deal: '3310 Cherrywood Rd · Email' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

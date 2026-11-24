@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Upload several files – desktop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 24px 120px">
+
+  <div aria-hidden="true" style="max-width: 1200px; margin: 0 auto; opacity: .45; filter: blur(3px)">
+    <div class="glass" style="height: 64px; border-radius: 999px"></div>
+    <div style="margin-top: 36px; display: flex; gap: 28px">
+      <div style="flex: 2; display: flex; flex-direction: column; gap: 18px">
+        <div class="serif sky" style="font-size: 60px">Hi Enoch, just 3 more things.</div>
+        <div class="panel" style="height: 120px"></div><div class="panel" style="height: 96px"></div><div class="panel" style="height: 96px"></div>
+      </div>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 18px"><div class="panel" style="height: 280px"></div><div class="panel" style="height: 200px"></div></div>
+    </div>
+  </div>
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: rgba(11,46,120,.30)"></div>
+
+  <div role="dialog" aria-modal="true" aria-labelledby="up-title" class="panel" style="position: absolute; left: 50%; top: 70px; transform: translateX(-50%); width: calc(100% - 40px); max-width: 720px; padding: 30px 32px; border-radius: 28px; z-index: 2; background: linear-gradient(160deg, rgba(255,255,255,.96), rgba(255,255,255,.86))">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px">
+      <div>
+        <div class="eyebrow">Upload</div>
+        <h1 id="up-title" class="serif" style="margin: 6px 0 0; font-size: 42px; line-height: 1">Upload several files</h1>
+        <p class="muted" style="margin: 8px 0 0">Mara reads each file and puts it in the right place. Just check her guesses.</p>
+      </div>
+      <button type="button" class="btn2" aria-label="Close" style="width: 44px; padding: 0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+
+    <div style="margin-top: 22px; border: 2px dashed #9fbdf0; border-radius: 20px; padding: 28px; text-align: center; background: #f2f7ff">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#1951fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"></path><path d="M7 9l5-5 5 5"></path><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"></path></svg>
+      <div style="font-size: 17px; font-weight: 600; margin-top: 8px">Drag files here</div>
+      <div class="muted" style="font-size: 14px">PDF, Word, JPG or PNG · up to 25 MB each</div>
+      <button type="button" class="btn2" style="margin-top: 14px">Choose files</button>
+    </div>
+
+    <ul style="list-style: none; margin: 22px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px">
+      <li style="border-radius: 18px; padding: 16px 18px; background: #ffffff; border: 1px solid #dbe4f3">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <strong style="flex: 1 1 220px; font-size: 15px">Lender_PreApproval_Omunu.pdf</strong>
+          <span class="faint" style="font-size: 13px">412 KB</span>
+          <span class="chip c-check">Needs your OK</span>
+        </div>
+        <div class="mara" style="margin-top: 12px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+          <span class="mav" aria-hidden="true">M</span>
+          <span style="flex: 1 1 220px; font-size: 14.5px">We think this is your <strong>pre-approval letter</strong>. Is that right?</span>
+          <button type="button" class="btn" style="height: 40px">Yes, that's right</button>
+          <button type="button" class="btn2" style="height: 40px">Pick another</button>
+        </div>
+      </li>
+      <li style="border-radius: 18px; padding: 16px 18px; background: #ffffff; border: 1px solid #dbe4f3">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <strong style="flex: 1 1 220px; font-size: 15px">HOA_addendum_signed.docx</strong>
+          <span class="faint" style="font-size: 13px">88 KB</span>
+          <span class="chip c-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 12l4 4 8-9"></path></svg>Filed as HOA addendum</span>
+        </div>
+      </li>
+      <li style="border-radius: 18px; padding: 16px 18px; background: #ffffff; border: 1px solid #dbe4f3">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <strong style="flex: 1 1 220px; font-size: 15px">IMG_4471.jpg</strong>
+          <span class="faint" style="font-size: 13px">2.1 MB · uploading 72%</span>
+        </div>
+        <div class="prog" style="margin-top: 10px" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="IMG_4471.jpg upload"><span style="width: 72%"></span></div>
+      </li>
+      <li style="border-radius: 18px; padding: 16px 18px; background: #fff7f7; border: 1px solid #f3a9a9">
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+          <strong style="flex: 1 1 220px; font-size: 15px">house_scan_full.pdf</strong>
+          <span class="chip c-block">Too large</span>
+        </div>
+        <p class="bad" style="margin: 8px 0 0; font-size: 14px">This file is 31 MB. Files must be 25 MB or less. Try saving it as a smaller PDF, or upload the pages as photos.</p>
+      </li>
+    </ul>
+
+    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; flex-wrap: wrap">
+      <button type="button" class="btn2">Add more files</button>
+      <a class="btn" href="C2-Checklist-Desktop.dc.html">Done</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

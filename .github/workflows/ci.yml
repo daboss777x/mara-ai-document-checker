@@ -1,0 +1,135 @@
+# CI for the Mara monorepo. One job per part so a failure points at its owner.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    # Decides whether the evals job runs: only when prompts or evals change.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      evals: ${{ steps.filter.outputs.evals }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            evals:
+              - 'prompts/**'
+              - 'evals/**'
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    env:
+      # Dummy public values so `next build` can run; no real project is contacted in CI.
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-dummy-anon-key
+      MARA_URL: https://example.invalid
+      MARA_HMAC_SECRET: ci-dummy-secret
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check web exists
+        id: exists
+        working-directory: .
+        run: |
+          if [ -f web/package.json ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "web/package.json not found, skipping"; echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+      # pnpm version comes from "packageManager" in the root package.json.
+      - uses: pnpm/action-setup@v4
+        if: steps.exists.outputs.ok == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.exists.outputs.ok == 'true'
+        with:
+          node-version: 22
+          cache: pnpm
+      - if: steps.exists.outputs.ok == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.exists.outputs.ok == 'true'
+        run: pnpm lint
+      - if: steps.exists.outputs.ok == 'true'
+        run: pnpm typecheck
+      - if: steps.exists.outputs.ok == 'true'
+        run: pnpm test
+      - if: steps.exists.outputs.ok == 'true'
+        run: pnpm build
+
+  mara:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mara
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check mara exists
+        id: exists
+        working-directory: .
+        run: |
+          if [ -f mara/pyproject.toml ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "mara/pyproject.toml not found, skipping"; echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+      - uses: astral-sh/setup-uv@v6
+        if: steps.exists.outputs.ok == 'true'
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - if: steps.exists.outputs.ok == 'true'
+        run: uv sync --locked
+      - if: steps.exists.outputs.ok == 'true'
+        run: uv run ruff check .
+      - if: steps.exists.outputs.ok == 'true'
+        # No exit-5 tolerance: an empty suite must fail.
+        run: uv run pytest -q -m "not integration"
+
+  supabase:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: supabase
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check supabase exists
+        id: exists
+        working-directory: .
+        run: |
+          if [ -f supabase/pyproject.toml ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "supabase/pyproject.toml not found, skipping"; echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+      - uses: astral-sh/setup-uv@v6
+        if: steps.exists.outputs.ok == 'true'
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - if: steps.exists.outputs.ok == 'true'
+        run: uv sync --locked
+      - if: steps.exists.outputs.ok == 'true'
+        # pgserver ships its own Postgres binaries, which run on ubuntu-latest.
+        run: uv run pytest -q
+
+  evals:
+    # BUILD_PLAN §10: run AI evals in CI on prompt changes.
+    needs: changes
+    if: needs.changes.outputs.evals == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          python-version: "3.12"
+      - name: Sync mara env (evals import mara code from Phase 2 on)
+        if: hashFiles('mara/pyproject.toml') != ''
+        run: uv sync --locked --project mara
+      - run: bash scripts/eval.sh
+        # Fake-model run by default (no key needed); pass --live locally for real model calls.

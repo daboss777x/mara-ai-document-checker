@@ -1,0 +1,39 @@
+key: sellers_disclosure
+name: Seller's disclosure notice
+required_signatures:
+  - key: seller_signature
+    description: The seller has signed at the end of the notice.
+    severity: blocker
+    client_fix_text: "The seller's signature is missing. Your agent will ask the seller to sign."
+  - key: buyer_acknowledgement
+    description: The buyer has signed the acknowledgement of receipt.
+    severity: blocker
+    client_fix_text: "Please sign the 'Buyer received' line at the end, then upload it again."
+required_initials:
+  - key: initials_each_page
+    description: Initials appear at the bottom of every page.
+    severity: blocker
+    client_fix_text: "Please initial the bottom of every page, then upload it again."
+required_dates:
+  - key: seller_signed_date
+    description: The seller's signature has a date next to it.
+    severity: blocker
+    client_fix_text: "The date next to the seller's signature is missing. Your agent will follow up."
+  - key: buyer_received_date
+    description: The date the buyer received the notice is filled in.
+    severity: warning
+    client_fix_text: "Please write the date you received this notice next to your signature."
+required_fields:
+  - key: property_address
+    description: The property address is filled in at the top.
+    severity: blocker
+    client_fix_text: "The property address is missing at the top of page 1. Please upload the corrected file."
+  - key: checklist_answered
+    description: Every yes / no / unknown question in the checklist has an answer marked.
+    severity: warning
+    client_fix_text: "A few checklist questions have no answer marked. Your agent will ask the seller to complete them."
+other_rules:
+  - key: all_pages_present
+    description: Every page is included and readable.
+    severity: blocker
+    client_fix_text: "Some pages look missing or cut off. Please upload every page in one file."

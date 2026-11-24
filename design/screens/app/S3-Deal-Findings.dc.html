@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Deal page – Findings and Ask Mara</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 24px 280px">
+  <div style="max-width: 1360px; margin: 0 auto; display: flex; flex-direction: column; gap: 18px">
+
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+      <a class="btn2" href="S2-Deals-Desktop.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>Deals</a>
+      <span style="flex: 1"></span>
+      <a class="btn2" href="C6-Messages-Mobile.dc.html">Message client</a>
+      <button type="button" class="btn2">Upload</button>
+      <a class="btn" href="S6-Draft.dc.html">Draft…</a>
+    </div>
+
+    <header style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+      <div>
+        <div class="sky-eyebrow">Buyer · Enoch Omunu · Agent Rachel Kim</div>
+        <h1 class="serif sky" style="margin: 6px 0 0; font-size: 54px; line-height: 1">1208 Barton Hills Dr</h1>
+      </div>
+      <div class="glass" style="border-radius: 18px; padding: 12px 16px; display: flex; gap: 18px; align-items: center; flex-wrap: wrap; font-size: 14px">
+        <div><div class="faint" style="font-size: 12px">Closing</div><strong>Fri, Dec 19</strong></div>
+        <div><div class="faint" style="font-size: 12px">Price</div><strong>$612,000</strong></div>
+        <div><div class="faint" style="font-size: 12px">Built</div><strong>1972 · HOA</strong></div>
+        <span class="chip c-block">At risk</span>
+      </div>
+    </header>
+
+    <nav class="tabs glass" aria-label="Deal sections" style="border-radius: 16px; padding: 0 10px">
+      <a class="tab" href="#overview">Overview</a>
+      <a class="tab" href="#checklist">Checklist</a>
+      <a class="tab" href="S5-Viewer.dc.html">Documents</a>
+      <a class="tab on" href="#findings">Findings <span class="count" style="margin: 0">{{open}}</span></a>
+      <a class="tab" href="S3-Deal-Timeline.dc.html">Timeline</a>
+      <a class="tab" href="#messages">Messages</a>
+      <a class="tab" href="#activity">Activity</a>
+    </nav>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+      <section aria-label="Findings" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+        <sc-for list="{{findings}}" as="f" hint-placeholder-count="3">
+          <article class="panel" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 10px; {{f.cardStyle}}">
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+              <span class="chip {{f.chip}}">{{f.sev}}</span>
+              <strong style="font-size: 16.5px; flex: 1 1 260px">{{f.title}}</strong>
+              <sc-if value="{{f.resolved}}" hint-placeholder-val="{{ false }}"><span class="chip c-miss">{{f.resolvedLabel}}</span></sc-if>
+            </div>
+            <p class="muted" style="margin: 0; font-size: 14px">{{f.detail}} <a class="ref" href="S5-Viewer.dc.html">{{f.ref}}</a></p>
+            <sc-if value="{{f.actionable}}" hint-placeholder-val="{{ true }}">
+              <div style="display: flex; gap: 8px; flex-wrap: wrap">
+                <button type="button" class="btn" onClick="{{f.fix}}">{{f.fixLabel}}</button>
+                <button type="button" class="btn2" onClick="{{f.dismiss}}">Dismiss with reason</button>
+              </div>
+            </sc-if>
+          </article>
+        </sc-for>
+
+        <article class="panel" style="padding: 20px 22px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap">
+            <span class="chip c-fix">Warning</span><strong style="font-size: 16.5px">Buyer name doesn't match across documents</strong>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+            <div style="border-radius: 14px; padding: 14px; background: #ffffff; border: 1px solid #dbe4f3">
+              <div class="faint" style="font-size: 12px; font-weight: 600">Purchase contract · p.1</div>
+              <div style="font-size: 18px; margin-top: 4px"><span class="hl" style="padding: 0 4px">Enoch O. Omunu</span></div>
+            </div>
+            <div style="border-radius: 14px; padding: 14px; background: #ffffff; border: 1px solid #dbe4f3">
+              <div class="faint" style="font-size: 12px; font-weight: 600">Pre-approval letter · p.1</div>
+              <div style="font-size: 18px; margin-top: 4px"><span class="hl" style="padding: 0 4px">Enoch Omunu</span></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <button type="button" class="btn">Same person</button>
+            <button type="button" class="btn2">Request corrected document</button>
+          </div>
+        </article>
+      </section>
+
+      <aside class="panel" aria-label="Ask Mara" style="flex: 1 1 360px; max-width: 440px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; gap: 10px; align-items: center">
+          <span class="mav" aria-hidden="true">M</span>
+          <div><strong>Ask Mara</strong><div class="faint" style="font-size: 12.5px">Answers come from this deal's documents</div></div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <sc-for list="{{prompts}}" as="p" hint-placeholder-count="3">
+            <button type="button" class="btn2" onClick="{{p.ask}}" style="justify-content: flex-start; height: auto; min-height: 44px; padding: 10px 14px; border-radius: 14px; text-align: left; white-space: normal">{{p.q}}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{hasAnswer}}" hint-placeholder-val="{{ true }}">
+          <div class="mara" style="padding: 14px; display: flex; flex-direction: column; gap: 10px">
+            <strong style="font-size: 14px">{{answer.q}}</strong>
+            <sc-for list="{{answer.lines}}" as="l" hint-placeholder-count="3">
+              <div style="font-size: 14px; line-height: 1.5">{{l.t}} <a class="ref" href="S5-Viewer.dc.html">{{l.src}}</a></div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <label for="ask" class="label">Ask about this deal</label>
+        <div style="display: flex; gap: 8px">
+          <input id="ask" class="field" placeholder="e.g. When does the option period end?" style="border-radius: 999px">
+          <button type="button" class="btn" aria-label="Ask" style="width: 48px; padding: 0; height: 48px; flex: none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        </div>
+        <p class="faint" style="margin: 0; font-size: 12.5px">Mara won't give legal advice. For questions about what a clause means, she'll create a task for the agent.</p>
+      </aside>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1200}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { st: {}, a: 0 }; }
+  renderVals() {
+    var self = this;
+    var st = this.state.st;
+    var base = [
+      { id: 'f1', sev: 'Blocker', chip: 'c-block', title: 'Buyer initials missing on page 2', detail: 'Seller’s Disclosure v1 needs buyer initials on every page. Page 2 footer is blank.', ref: 'Seller’s Disclosure · p.2', fixLabel: 'Draft fix request to client' },
+      { id: 'f2', sev: 'Warning', chip: 'c-fix', title: 'Question 14 left blank by the seller', detail: 'All yes/no questions must be answered. Q14 (previous flooding) has no answer.', ref: 'Seller’s Disclosure · p.3 · Q14', fixLabel: 'Draft note to listing agent' },
+      { id: 'f3', sev: 'Warning', chip: 'c-fix', title: 'HOA resale certificate not in the file', detail: 'The contract includes an HOA addendum, so a resale certificate is required. None uploaded yet.', ref: 'Contract · §11 · HOA addendum', fixLabel: 'Draft request to listing agent' }
+    ];
+    var open = 1;
+    var findings = base.map(function (f) {
+      var s = st[f.id];
+      if (!s) open++;
+      return Object.assign({}, f, {
+        actionable: !s, resolved: !!s,
+        resolvedLabel: s === 'fix' ? 'Draft sent to approvals' : 'Dismissed',
+        cardStyle: s ? 'opacity: .7' : '',
+        fix: function () { var n = Object.assign({}, self.state.st); n[f.id] = 'fix'; self.setState({ st: n }); },
+        dismiss: function () { var n = Object.assign({}, self.state.st); n[f.id] = 'dismiss'; self.setState({ st: n }); }
+      });
+    });
+    var answers = [
+      { q: 'What’s still missing on this deal?', lines: [
+        { t: 'Pre-approval letter, due Wed, Nov 26.', src: 'Checklist' },
+        { t: 'Buyer initials on page 2 of the seller’s disclosure.', src: 'Seller’s Disclosure · p.2' },
+        { t: 'Signed HOA addendum and the HOA resale certificate.', src: 'Contract · §11' } ] },
+      { q: 'When does the option period end?', lines: [
+        { t: 'Friday, Nov 28 at 5:00 PM, 10 days after the effective date of Nov 18.', src: 'Contract · §5B · p.2' } ] },
+      { q: 'Summarise this deal for the lender', lines: [
+        { t: 'Buyer Enoch Omunu, $612,000, conventional loan, closing Fri, Dec 19 per amendment v2.', src: 'Amendment v2 · p.1' },
+        { t: 'Appraisal due by Dec 5; financing deadline Dec 12.', src: 'Timeline v2' } ] }
+    ];
+    var a = this.state.a;
+    return {
+      findings: findings,
+      open: open,
+      prompts: answers.map(function (x, i) { return { q: x.q, ask: function () { self.setState({ a: i }); } }; }),
+      hasAnswer: true,
+      answer: answers[a]
+    };
+  }
+}
+</script>
+</body>
+</html>

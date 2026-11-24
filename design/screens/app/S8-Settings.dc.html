@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Settings – Mara and reminders</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="../../assets/cs-ui-light.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#1a5cc6}a{color:#1745a8}a:hover{color:#0b1f4d}</style>
+</helmet>
+<div class="scene" style="min-height: 100vh; padding: 20px 20px 280px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+  <aside class="panel" style="flex: 1 1 232px; max-width: 260px; padding: 20px 14px; display: flex; flex-direction: column; gap: 4px">
+    <a class="btn3" href="S1-Today-Desktop.dc.html" style="text-decoration: none">← Back to Today</a>
+    <div class="eyebrow" style="padding: 10px 14px 6px">Broker settings</div>
+    <a class="nav" href="#policies">Document policies</a>
+    <a class="nav" href="#templates">Templates</a>
+    <a class="nav on" href="#mara">Mara &amp; reminders</a>
+    <a class="nav" href="#state">State rules · Texas</a>
+    <a class="nav" href="#users">Users &amp; roles</a>
+    <a class="nav" href="#connections">Connections</a>
+  </aside>
+
+  <main style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px; max-width: 980px">
+    <div>
+      <div class="sky-eyebrow">Settings</div>
+      <h1 class="serif sky" style="margin: 6px 0 0; font-size: 54px; line-height: 1">Mara &amp; reminders</h1>
+    </div>
+
+    <section class="panel" aria-labelledby="h-auto" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px">
+      <h2 id="h-auto" style="margin: 0; font-size: 18px">How much can Mara send on her own?</h2>
+      <div role="radiogroup" aria-labelledby="h-auto" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px">
+        <button type="button" role="radio" aria-checked="{{m1}}" onClick="{{pick1}}" style="text-align: left; font: inherit; cursor: pointer; padding: 18px; border-radius: 18px; background: #ffffff; color: #0b1f4d; {{s1}}">
+          <strong style="font-size: 16px">Approve everything</strong>
+          <div class="muted" style="font-size: 14px; margin-top: 4px">Every message and document waits for a person to approve it. Recommended to start.</div>
+        </button>
+        <button type="button" role="radio" aria-checked="{{m2}}" onClick="{{pick2}}" style="text-align: left; font: inherit; cursor: pointer; padding: 18px; border-radius: 18px; background: #ffffff; color: #0b1f4d; {{s2}}">
+          <strong style="font-size: 16px">Auto-send approved reminder templates</strong>
+          <div class="muted" style="font-size: 14px; margin-top: 4px">Routine document reminders from templates you've approved go out on schedule. Everything else still waits.</div>
+        </button>
+      </div>
+      <sc-if value="{{isAuto}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 12px 14px; border-radius: 14px; background: #fff4de; color: #5c3700; font-size: 14px">Only templates marked "Allow automatic sending" are affected. Mara never auto-sends anything that explains contract terms, negotiates, or mentions money.</div>
+      </sc-if>
+    </section>
+
+    <section class="panel" aria-labelledby="h-rem" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 16px">
+      <h2 id="h-rem" style="margin: 0; font-size: 18px">Reminder schedule for missing documents</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px">
+        <div style="padding: 14px; border-radius: 14px; background: #f3f7fd; border: 1px solid #dbe4f3"><div class="faint" style="font-size: 12px; font-weight: 600">Day 0</div><strong>First request</strong></div>
+        <div style="padding: 14px; border-radius: 14px; background: #f3f7fd; border: 1px solid #dbe4f3"><div class="faint" style="font-size: 12px; font-weight: 600">Day 2</div><strong>Friendly reminder</strong></div>
+        <div style="padding: 14px; border-radius: 14px; background: #f3f7fd; border: 1px solid #dbe4f3"><div class="faint" style="font-size: 12px; font-weight: 600">Day 4</div><strong>Reminder + agent copied</strong></div>
+        <div style="padding: 14px; border-radius: 14px; background: #fff4de; border: 1px solid #f1c77c"><div class="warn" style="font-size: 12px; font-weight: 600">1 day before due</div><strong>Urgent</strong></div>
+        <div style="padding: 14px; border-radius: 14px; background: #fff7f7; border: 1px solid #f3a9a9"><div class="bad" style="font-size: 12px; font-weight: 600">Overdue</div><strong>Call task for agent</strong></div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px">
+        <label style="display: flex; flex-direction: column; gap: 6px"><span class="label">Send at (client's local time)</span><select class="field"><option>10:00 AM</option><option>9:00 AM</option><option>12:00 PM</option></select></label>
+        <label style="display: flex; flex-direction: column; gap: 6px"><span class="label">Quiet hours</span><select class="field"><option>8:00 PM – 8:00 AM</option><option>9:00 PM – 9:00 AM</option></select></label>
+        <label style="display: flex; flex-direction: column; gap: 6px"><span class="label">Most texts per person per day</span><select class="field"><option>1 (urgent can exceed)</option><option>2</option></select></label>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px">
+        <button type="button" class="toggle {{tgl}}" role="switch" aria-checked="{{spanish}}" aria-label="Send Spanish versions when the client prefers Spanish" onClick="{{flip}}" style="cursor: pointer"></button>
+        <span style="font-size: 14.5px">Send Spanish versions when the client prefers Spanish</span>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-con" style="padding: 22px 24px">
+      <h2 id="h-con" style="margin: 0 0 8px; font-size: 18px">Connections</h2>
+      <table class="tbl">
+        <tbody>
+          <tr><td style="padding-left: 0"><strong>Google Drive</strong><div class="muted" style="font-size: 13px">Shared Drive · Cedar &amp; Stone Deals</div></td><td><span class="chip c-done">Connected</span></td></tr>
+          <tr><td style="padding-left: 0"><strong>Text messages</strong><div class="muted" style="font-size: 13px">(512) 555-0199 · US carrier registration</div></td><td><span class="chip c-fix">Registration pending</span></td></tr>
+          <tr><td style="padding-left: 0"><strong>Email</strong><div class="muted" style="font-size: 13px">mara@cedarstone.com</div></td><td><span class="chip c-done">Connected</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="glass" style="border-radius: 18px; padding: 12px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; position: sticky; bottom: 16px">
+      <span style="flex: 1; font-size: 14.5px; font-weight: 500">You have unsaved changes.</span>
+      <button type="button" class="btn2">Discard</button>
+      <button type="button" class="btn">Save changes</button>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { mode: 1, es: true }; }
+  renderVals() {
+    var self = this;
+    var m = this.state.mode;
+    var on = 'border: 2px solid #1951fc; box-shadow: 0 0 0 4px rgba(25,81,252,.12)';
+    var off = 'border: 1px solid #dbe4f3';
+    return {
+      m1: m === 1 ? 'true' : 'false', m2: m === 2 ? 'true' : 'false',
+      s1: m === 1 ? on : off, s2: m === 2 ? on : off,
+      isAuto: m === 2,
+      pick1: function () { self.setState({ mode: 1 }); },
+      pick2: function () { self.setState({ mode: 2 }); },
+      tgl: this.state.es ? 'on' : '',
+      spanish: this.state.es ? 'true' : 'false',
+      flip: function () { self.setState({ es: !self.state.es }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

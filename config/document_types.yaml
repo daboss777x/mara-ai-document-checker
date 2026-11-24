@@ -1,0 +1,27 @@
+# Document types a deal checklist can ask for. Kwame seeds the same keys into
+# public.document_types. Fictitious Texas residential examples (Cedar & Stone Realty).
+document_types:
+  - key: buyer_rep_agreement
+    name: Buyer representation agreement
+    description: The agreement that says Cedar & Stone Realty works for you as your buyer's agent.
+    standard_key: buyer_rep_agreement
+  - key: sales_contract
+    name: Sales contract
+    description: The signed contract to buy the home, with the price, the dates and both sides' signatures.
+    standard_key: sales_contract
+  - key: sellers_disclosure
+    name: Seller's disclosure notice
+    description: The seller's notice about the condition of the home. Every page needs to be initialed.
+    standard_key: sellers_disclosure
+  - key: lead_paint_addendum
+    name: Lead-based paint addendum
+    description: Required for homes built before 1978. Confirms you received the lead paint information.
+    standard_key: lead_paint_addendum
+  - key: preapproval_letter
+    name: Mortgage pre-approval letter
+    description: A letter from your lender saying how much you are approved to borrow.
+    standard_key: preapproval_letter
+  - key: hoa_addendum
+    name: HOA addendum
+    description: The homeowners association addendum, if the home is in an HOA community.
+    standard_key: hoa_addendum

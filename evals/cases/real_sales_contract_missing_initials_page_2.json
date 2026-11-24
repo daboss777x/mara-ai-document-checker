@@ -1,0 +1,7 @@
+{
+  "document_type": "sales_contract",
+  "expect_flagged": [
+    "initials_each_page"
+  ],
+  "strict": true
+}

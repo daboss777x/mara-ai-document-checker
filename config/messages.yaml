@@ -1,0 +1,14 @@
+# SMS templates. Placeholders: {first_name} {agent_name} {address} {portal_link} {items} {code}
+# invite: web composes it (it alone sees the raw link) and mirrors this wording.
+# Keep every message short, friendly and free of legal, financial or banking content.
+invite: >-
+  Hi {first_name}, this is Cedar & Stone Realty. {agent_name} has set up a short
+  checklist of documents for {address}. Upload them here whenever you're ready: {portal_link}
+verify_code: >-
+  Cedar & Stone Realty: your verification code is {code}. It expires in 10 minutes.
+  If you didn't ask for it, you can ignore this message.
+reminder: >-
+  Hi {first_name}, a quick nudge from Cedar & Stone Realty. Still to do for {address}: {items}.
+  Upload them here: {portal_link}
+fix_request_footer: >-
+  Please re-upload here when you can: {portal_link} - Cedar & Stone Realty

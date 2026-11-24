@@ -1,0 +1,7 @@
+{
+  "document_type": "sellers_disclosure",
+  "expect_flagged": [
+    "checklist_answered"
+  ],
+  "strict": true
+}

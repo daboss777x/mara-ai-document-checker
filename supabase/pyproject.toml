@@ -1,0 +1,17 @@
+[project]
+name = "mara-supabase-tests"
+version = "0.1.0"
+description = "Schema, RLS and trigger tests for the Mara Supabase migrations (embedded Postgres via pgserver)."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pgserver",
+    "psycopg[binary]",
+    "pytest",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,7 @@
+{
+  "document_type": "preapproval_letter",
+  "expect_flagged": [
+    "letter_date"
+  ],
+  "strict": true
+}

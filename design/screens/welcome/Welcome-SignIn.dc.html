@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cedar &amp; Stone Portal – Welcome and sign in</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#1a5cc6}
+a{color:#1745a8}a:hover{color:#0b1f4d}
+*{box-sizing:border-box}
+.world{position:absolute;left:0;right:0;top:0;height:260vh;transform-origin:50% 100%;transition:transform 3.4s cubic-bezier(.7,0,.18,1);will-change:transform}
+.w-high{transform:translateY(0) scale(1)}
+.w-rest{transform:translateY(-160vh) scale(1)}
+.w-close{transform:translateY(-160vh) scale(1.1);transition-duration:2.6s}
+.w-enter{transform:translateY(-160vh) scale(1.3);transition-duration:1.8s}
+.photo{position:absolute;left:0;right:0;bottom:0;height:min(52vh,calc(100vw * 610 / 1672));min-height:300px;background:url(../../assets/austin-skyline.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 32%);mask-image:linear-gradient(to bottom,transparent 0%,#000 32%)}
+.fade{transition:opacity .9s ease,transform .9s ease}
+.show{opacity:1;transform:none;pointer-events:auto}
+.hide{opacity:0;transform:translateY(18px);pointer-events:none}
+.late{transition-delay:2.5s}
+.late2{transition-delay:1.3s}
+.late3{transition-delay:.9s}
+.glass{background:linear-gradient(135deg,rgba(255,255,255,.62),rgba(255,255,255,.36));backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border:1px solid rgba(255,255,255,.75);box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 18px 50px rgba(10,40,110,.20);color:#0b1f4d}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,255,255,.66))}
+.role{transition:transform .35s ease,box-shadow .35s ease;cursor:pointer}
+.role:hover{transform:translateY(-4px);box-shadow:inset 0 1px 0 #fff,0 0 40px rgba(255,255,255,.55),0 24px 60px rgba(10,40,110,.25)}
+.role:focus-visible,.btn:focus-visible,.ghost:focus-visible,.field:focus-visible,.link:focus-visible{outline:3px solid #0b1f4d;outline-offset:3px}
+.btn{transition:box-shadow .3s ease,transform .3s ease;cursor:pointer}
+.btn:hover{transform:translateY(-1px);box-shadow:0 0 36px rgba(25,81,252,.55),inset 0 1px 0 rgba(255,255,255,.5)}
+.ghost{cursor:pointer}
+.ghost:hover{background:rgba(11,31,77,.06)}
+.field::placeholder{color:#5b6d93}
+.field:focus{border-color:#1951fc;outline:none;box-shadow:0 0 0 4px rgba(25,81,252,.15)}
+.glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px);animation:drift 20s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(50px,-40px) scale(1.08)}}
+.cloud{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);filter:blur(28px);animation:cloud 40s linear infinite alternate}
+@keyframes cloud{from{transform:translateX(-30px)}to{transform:translateX(30px)}}
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.spin{animation:spin 1.1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gtext{background:linear-gradient(180deg,#1951fc 0%,#0b2cb1 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.skytext{text-shadow:0 2px 24px rgba(8,40,120,.35)}
+@media (max-width:900px){.folder{display:none !important}.roles{flex-direction:column;align-items:stretch !important}.navnote{display:none !important}}
+@media (prefers-reduced-motion:reduce){.world,.fade{transition-duration:.01s !important;transition-delay:0s !important}.glow,.float,.cloud,.spin{animation:none !important}}
+</style>
+</helmet>
+
+<div style="position: relative; width: 100%; height: 100vh; min-height: 680px; overflow: hidden; background: #1a5cc6; font-family: Inter, system-ui, sans-serif; color: #ffffff">
+
+  <div class="{{worldClass}}" aria-hidden="true">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, #0b46aa 0%, #1252bd 30%, #1a5cc6 58%, #2368cf 70%, #3477d6 77%, #6f98dc 82%, #9facdd 86%, #9facdd 100%)"></div>
+    <div class="cloud" style="left: 6%; top: 34vh; width: 560px; height: 120px"></div>
+    <div class="cloud" style="right: 4%; top: 62vh; width: 700px; height: 150px; animation-delay: -12s"></div>
+    <div class="cloud" style="left: 26%; top: 96vh; width: 820px; height: 170px; animation-delay: -20s"></div>
+    <div class="cloud" style="right: 16%; top: 128vh; width: 460px; height: 100px; background: rgba(255,226,210,.45)"></div>
+    <div class="cloud" style="left: 10%; top: 150vh; width: 380px; height: 80px; background: rgba(255,255,255,.35)"></div>
+    <div class="photo"></div>
+  </div>
+
+  <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none">
+    <div class="glow" style="left: -14%; top: 4%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(255,255,255,.28) 0%, rgba(255,255,255,0) 62%)"></div>
+    <div class="glow" style="right: -14%; top: 36%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(255,205,180,.30) 0%, rgba(255,205,180,0) 62%); animation-delay: -6s"></div>
+    <div class="glow" style="left: 20%; bottom: -24%; width: 70vw; height: 40vw; background: radial-gradient(circle, rgba(203,233,253,.40) 0%, rgba(203,233,253,0) 62%); animation-delay: -12s"></div>
+    <svg width="100%" height="100%" style="position: absolute; inset: 0; opacity: .10; mix-blend-mode: overlay">
+      <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch"></feTurbulence></filter>
+      <rect width="100%" height="100%" filter="url(#grain)"></rect>
+    </svg>
+  </div>
+
+  <div class="{{navClass}}" style="position: absolute; top: 20px; left: 0; right: 0; display: flex; justify-content: center; padding: 0 16px; z-index: 20">
+    <nav class="glass" aria-label="Portal" style="width: 100%; max-width: 1120px; height: 64px; border-radius: 999px; padding: 0 12px 0 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: baseline; gap: 10px">
+        <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; color: #0b1f4d">Cedar &amp; Stone</span>
+        <span style="font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #3b4f78">Realty</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <span class="navnote" style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #3b4f78; padding: 0 12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+          Secure portal
+        </span>
+        <a class="link" href="#help" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border-radius: 999px; background: #0b1f4d; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 500">Need help?</a>
+      </div>
+    </nav>
+  </div>
+
+  <section class="{{heroClass}}" aria-label="Choose how you are signing in" style="position: absolute; left: 0; right: 0; top: 16vh; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 24px; z-index: 10">
+    <span class="glass" style="display: inline-flex; align-items: center; gap: 10px; height: 34px; padding: 0 16px; border-radius: 999px; font-size: 13px; font-weight: 500">
+      <span style="width: 7px; height: 7px; border-radius: 50%; background: #1951fc; box-shadow: 0 0 10px #1951fc"></span>
+      Client &amp; agent portal
+    </span>
+    <h1 class="skytext" style="margin: 22px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.6vw, 100px); line-height: .98; letter-spacing: -1px">Every document, every date,<br><em>handled.</em></h1>
+    <p class="skytext" style="margin: 20px 0 0; max-width: 520px; font-size: 19px; font-weight: 500; line-height: 1.5">Welcome to Cedar &amp; Stone. Tell us who you are and we'll take you to the right door.</p>
+    <div class="roles" style="margin-top: 38px; display: flex; gap: 18px; align-items: center">
+      <button type="button" class="glass role" onClick="{{pickClient}}" style="width: 290px; min-height: 96px; padding: 18px 22px; border-radius: 24px; display: flex; align-items: center; gap: 16px; font: inherit; text-align: left">
+        <span style="flex: none; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0b1f4d; color: #ffffff">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path></svg>
+        </span>
+        <span style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1; color: #0b1f4d">Client</span>
+          <span style="font-size: 14px; color: #3b4f78">Buying or selling a home</span>
+        </span>
+      </button>
+      <button type="button" class="glass role" onClick="{{pickAgent}}" style="width: 290px; min-height: 96px; padding: 18px 22px; border-radius: 24px; display: flex; align-items: center; gap: 16px; font: inherit; text-align: left">
+        <span style="flex: none; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #0b1f4d; color: #ffffff">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path><path d="M3 13h18"></path></svg>
+        </span>
+        <span style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-family: 'Instrument Serif', Georgia, serif; font-size: 30px; line-height: 1; color: #0b1f4d">Agent</span>
+          <span style="font-size: 14px; color: #3b4f78">Cedar &amp; Stone team</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="{{signClass}}" aria-label="Sign in" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 72px; padding: 104px 20px 32px; z-index: 10">
+
+    <div class="folder float" aria-hidden="true" style="position: relative; width: 340px; height: 320px; flex: none">
+      <div style="position: absolute; left: 0; top: 64px; width: 150px; height: 44px; border-radius: 20px 20px 0 0; background: rgba(255,255,255,.35); border: 1px solid rgba(255,255,255,.7); border-bottom: none"></div>
+      <div style="position: absolute; left: 0; top: 96px; width: 340px; height: 224px; border-radius: 0 26px 26px 26px; background: rgba(255,255,255,.32); border: 1px solid rgba(255,255,255,.7)"></div>
+      <div style="position: absolute; left: 56px; top: 30px; width: 190px; height: 220px; border-radius: 16px; background: #ffffff; box-shadow: 0 10px 30px rgba(10,40,110,.22); padding: 26px 22px; display: flex; flex-direction: column; gap: 12px">
+        <div style="height: 10px; width: 70%; border-radius: 6px; background: #b9cdf0"></div>
+        <div style="height: 8px; width: 100%; border-radius: 6px; background: #dbe6f7"></div>
+        <div style="height: 8px; width: 86%; border-radius: 6px; background: #dbe6f7"></div>
+      </div>
+      <div style="position: absolute; left: 122px; top: 44px; width: 180px; height: 210px; border-radius: 16px; background: #f6f9ff; transform: rotate(6deg); box-shadow: 0 10px 30px rgba(10,40,110,.22); padding: 26px 22px; display: flex; flex-direction: column; gap: 12px">
+        <div style="height: 10px; width: 60%; border-radius: 6px; background: #b9cdf0"></div>
+        <div style="height: 8px; width: 100%; border-radius: 6px; background: #dbe6f7"></div>
+      </div>
+      <div class="glass" style="position: absolute; left: 0; bottom: 0; width: 340px; height: 196px; border-radius: 26px; padding: 26px 28px; display: flex; flex-direction: column; justify-content: flex-end">
+        <span style="font-size: 15px; color: #3b4f78">#your-deal-file</span>
+        <span class="gtext" style="font-size: 60px; font-weight: 600; letter-spacing: -2.5px; line-height: .95">documents</span>
+      </div>
+    </div>
+
+    <div class="glass card" style="width: 100%; max-width: 440px; border-radius: 30px; padding: 34px 34px 28px">
+      <button type="button" class="ghost" onClick="{{back}}" style="display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px 0 10px; margin: -6px 0 0 -10px; border: none; border-radius: 999px; background: transparent; color: #3b4f78; font: inherit; font-size: 14px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"></path></svg>
+        Back
+      </button>
+
+      <sc-if value="{{isClient}}" hint-placeholder-val="{{ true }}">
+        <sc-if value="{{stepContact}}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{sendCode}}" style="display: flex; flex-direction: column; gap: 18px; margin-top: 10px">
+            <div>
+              <div style="font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #1951fc; font-weight: 600">Client sign in</div>
+              <h2 style="margin: 8px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1; color: #0b1f4d">Welcome home.</h2>
+              <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #3b4f78">Enter the mobile number or email your agent has on file. We'll send you a 6-digit code.</p>
+            </div>
+            <label for="contact" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: #0b1f4d">
+              Mobile number or email
+              <input id="contact" class="field" type="text" autocomplete="username" placeholder="(512) 555-0123 or you@email.com" style="height: 54px; padding: 0 18px; border-radius: 16px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 16px">
+            </label>
+            <button type="submit" class="btn" style="height: 54px; border-radius: 999px; border: 1px solid rgba(255,255,255,.5); background: linear-gradient(180deg, #2f6bff 0%, #1951fc 50%, #0b2cb1 100%); box-shadow: 0 0 26px rgba(25,81,252,.35), inset 0 1px 0 rgba(255,255,255,.5); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600">Send my code</button>
+            <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #3b4f78">First time here? Open the link your agent texted you.</p>
+          </form>
+        </sc-if>
+        <sc-if value="{{stepCode}}" hint-placeholder-val="{{ false }}">
+          <form onSubmit="{{enter}}" style="display: flex; flex-direction: column; gap: 18px; margin-top: 10px">
+            <div>
+              <div style="font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #1951fc; font-weight: 600">Check your phone</div>
+              <h2 style="margin: 8px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1; color: #0b1f4d">Enter your code.</h2>
+              <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #3b4f78">We sent a 6-digit code. It works for 10 minutes.</p>
+            </div>
+            <fieldset style="border: none; margin: 0; padding: 0">
+              <legend style="font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #0b1f4d">6-digit code</legend>
+              <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px">
+                <input class="field" aria-label="Digit 1" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+                <input class="field" aria-label="Digit 2" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+                <input class="field" aria-label="Digit 3" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+                <input class="field" aria-label="Digit 4" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+                <input class="field" aria-label="Digit 5" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+                <input class="field" aria-label="Digit 6" inputmode="numeric" maxlength="1" style="height: 58px; text-align: center; border-radius: 14px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 22px; min-width: 0">
+              </div>
+            </fieldset>
+            <button type="submit" class="btn" style="height: 54px; border-radius: 999px; border: 1px solid rgba(255,255,255,.5); background: linear-gradient(180deg, #2f6bff 0%, #1951fc 50%, #0b2cb1 100%); box-shadow: 0 0 26px rgba(25,81,252,.35), inset 0 1px 0 rgba(255,255,255,.5); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600">Enter my portal</button>
+            <button type="button" class="ghost" onClick="{{resend}}" style="align-self: flex-start; height: 44px; padding: 0 14px; margin-left: -14px; border: none; border-radius: 999px; background: transparent; color: #1745a8; font: inherit; font-size: 14px; text-decoration: underline">Send a new code</button>
+          </form>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{isAgent}}" hint-placeholder-val="{{ false }}">
+        <form onSubmit="{{enter}}" style="display: flex; flex-direction: column; gap: 18px; margin-top: 10px">
+          <div>
+            <div style="font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #1951fc; font-weight: 600">Agent sign in</div>
+            <h2 style="margin: 8px 0 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 44px; line-height: 1; color: #0b1f4d">Good to see you.</h2>
+            <p style="margin: 10px 0 0; font-size: 15px; line-height: 1.55; color: #3b4f78">Mara has your approvals and today's deadlines ready.</p>
+          </div>
+          <label for="aemail" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: #0b1f4d">
+            Work email
+            <input id="aemail" class="field" type="email" autocomplete="email" placeholder="you@cedarstone.com" style="height: 54px; padding: 0 18px; border-radius: 16px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 16px">
+          </label>
+          <label for="apass" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; font-weight: 500; color: #0b1f4d">
+            Password
+            <input id="apass" class="field" type="password" autocomplete="current-password" placeholder="Your password" style="height: 54px; padding: 0 18px; border-radius: 16px; border: 1px solid #c9d6ee; background: rgba(255,255,255,.92); color: #0b1f4d; font: inherit; font-size: 16px">
+          </label>
+          <button type="submit" class="btn" style="height: 54px; border-radius: 999px; border: 1px solid rgba(255,255,255,.5); background: linear-gradient(180deg, #2f6bff 0%, #1951fc 50%, #0b2cb1 100%); box-shadow: 0 0 26px rgba(25,81,252,.35), inset 0 1px 0 rgba(255,255,255,.5); color: #ffffff; font: inherit; font-size: 16px; font-weight: 600">Sign in</button>
+          <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+            <a class="link" href="#magic" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 14px">Email me a sign-in link</a>
+            <a class="link" href="#forgot" style="display: inline-flex; align-items: center; min-height: 44px; font-size: 14px">Forgot password?</a>
+          </div>
+        </form>
+      </sc-if>
+
+      <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(11,31,77,.12); display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.5; color: #3b4f78">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 1px"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path></svg>
+        <span>We will never send bank or wiring details by text or email. If anyone does, call your title company on a number you already trust.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="{{enterClass}}" aria-live="polite" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; padding: 24px; background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.35), rgba(26,92,198,.55)); z-index: 30">
+    <div class="spin" aria-hidden="true" style="width: 54px; height: 54px; border-radius: 50%; border: 3px solid rgba(255,255,255,.4); border-top-color: #ffffff"></div>
+    <h2 class="skytext" style="margin: 0; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(36px, 4vw, 56px); line-height: 1">Opening your portal…</h2>
+    <p class="skytext" style="margin: 0; max-width: 420px; font-size: 17px; font-weight: 500; line-height: 1.55">{{enterMsg}}</p>
+    <button type="button" class="glass ghost" onClick="{{restart}}" style="margin-top: 8px; height: 44px; padding: 0 20px; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 500">Back to start</button>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"skipIntro":{"editor":"boolean","default":false,"section":"Preview"},"startAt":{"editor":"enum","options":["welcome","client sign in","client code","agent sign in"],"default":"welcome","section":"Preview"},"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    var start = props.startAt || 'welcome';
+    var skip = !!props.skipIntro;
+    if (start === 'welcome') {
+      this.state = { phase: skip ? 'rest' : 'high', role: null, step: 'contact', first: !skip };
+    } else {
+      this.state = {
+        phase: 'close',
+        role: start === 'agent sign in' ? 'agent' : 'client',
+        step: start === 'client code' ? 'code' : 'contact',
+        first: false
+      };
+    }
+  }
+  componentDidMount() {
+    var self = this;
+    if (this.state.phase === 'high') {
+      this.t = setTimeout(function () { self.setState({ phase: 'rest' }); }, 600);
+    }
+  }
+  componentWillUnmount() {
+    if (this.t) clearTimeout(this.t);
+  }
+  renderVals() {
+    var self = this;
+    var s = this.state;
+    var p = s.phase;
+    function pick(role) {
+      return function () { self.setState({ role: role, step: 'contact', phase: 'close', first: false }); };
+    }
+    return {
+      worldClass: 'world w-' + p,
+      navClass: 'fade ' + (p === 'high' ? 'hide' : 'show') + (s.first ? ' late' : ''),
+      heroClass: 'fade ' + (p === 'rest' ? ('show' + (s.first ? ' late' : '')) : 'hide'),
+      signClass: 'fade ' + (p === 'close' ? 'show late2' : 'hide'),
+      enterClass: 'fade ' + (p === 'enter' ? 'show late3' : 'hide'),
+      isClient: s.role === 'client',
+      isAgent: s.role === 'agent',
+      stepContact: s.step === 'contact',
+      stepCode: s.step === 'code',
+      enterMsg: s.role === 'agent'
+        ? 'Mara is pulling up your approvals and today’s deadlines.'
+        : 'Mara is getting your document checklist ready.',
+      pickClient: pick('client'),
+      pickAgent: pick('agent'),
+      back: function () { self.setState({ phase: 'rest' }); },
+      sendCode: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ step: 'code' }); },
+      resend: function () { self.setState({ step: 'code' }); },
+      enter: function (e) { if (e && e.preventDefault) e.preventDefault(); self.setState({ phase: 'enter' }); },
+      restart: function () { self.setState({ phase: 'rest', role: null, step: 'contact' }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

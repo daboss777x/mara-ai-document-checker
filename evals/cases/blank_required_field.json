@@ -1,0 +1,6 @@
+{
+  "document_type": "sales_contract",
+  "expect_flagged": [
+    "sales_price"
+  ]
+}

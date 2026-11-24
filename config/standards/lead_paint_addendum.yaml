@@ -1,0 +1,27 @@
+key: lead_paint_addendum
+name: Lead-based paint addendum
+required_signatures:
+  - key: buyer_signature
+    description: The buyer has signed the acknowledgement.
+    severity: blocker
+    client_fix_text: "Please sign the 'Buyer' line, then upload it again."
+  - key: seller_signature
+    description: The seller has signed.
+    severity: blocker
+    client_fix_text: "The seller's signature is missing. Your agent will follow up."
+required_initials:
+  - key: buyer_initials_boxes
+    description: The buyer has initialed each acknowledgement box (received the pamphlet, inspection choice).
+    severity: blocker
+    client_fix_text: "Please put your initials in each box next to the statements, then upload it again."
+required_dates:
+  - key: buyer_signed_date
+    description: The buyer's signature has a date next to it.
+    severity: blocker
+    client_fix_text: "Please write today's date next to your signature, then upload it again."
+required_fields:
+  - key: property_address
+    description: The property address is filled in.
+    severity: blocker
+    client_fix_text: "The property address is missing. Please fill it in and upload again."
+other_rules: []

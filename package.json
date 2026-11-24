@@ -1,0 +1,13 @@
+{
+  "name": "mara",
+  "description": "Mara: AI document checker with a human in the loop (Next.js + Supabase + Modal + Claude).",
+  "private": true,
+  "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "test": "bash scripts/test.sh",
+    "test:int": "bash scripts/test-int.sh",
+    "eval": "bash scripts/eval.sh",
+    "lint": "bash scripts/lint.sh",
+    "gen:hmac": "bash scripts/gen-hmac-secret.sh"
+  }
+}
